@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Login } from "./components/Login";
 import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
 import { Dashboard } from "./components/Dashboard";
@@ -9,6 +8,7 @@ import { Transactions } from "./components/Transactions";
 import { Reports } from "./components/Reports";
 import { Settings } from "./components/Settings";
 import { useAuth } from "./context/AuthContext";
+import Login from "./components/Login";
 
 export default function App() {
   const { isAuthenticated, loading } = useAuth();

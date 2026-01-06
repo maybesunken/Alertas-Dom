@@ -239,5 +239,12 @@ export function LoginFormContent() {
     </div>
   );
 }
+const Login = () => {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey="6Le7tW0pAAAAAMFRmxZyomtBk2QzsnVI2_7QuysD">
+      <LoginFormContent />
+    </GoogleReCaptchaProvider>
+  );
+};
 
-export const Login = LoginFormContent;
+export default Login;
