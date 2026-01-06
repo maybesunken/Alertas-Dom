@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test DOM API Direct</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <h1>Test DOM API Direto</h1>
+    <form id="loginForm">
+        <input type="email" id="email" value="pedro.sansone@dompagamentos.com" /><br>
+        <input type="password" id="password" value="pedro.sansone@dompagamentos.com" /><br>
+        <div class="g-recaptcha" data-sitekey="6LclSj4sAAAAAAXXVjovZVK49L60AApsI5O3Dawj"></div><br>
+        <button type="submit">Login</button>
+    </form>
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const recaptchaToken = grecaptcha.getResponse();
+            
+            const result = document.getElementById('result');
+            result.textContent = 'Enviando...';
+            
+            try {
+                console.log('Enviando:', { login: email, pass: password, token_recaptcha: recaptchaToken });
+                const response = await fetch('https://dev.api.grupookta.com.br/platform/login', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        login: email,
+                        pass: password,
+                        token_recaptcha: recaptchaToken
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Response data:', data);
+                result.textContent = `Status: ${response.status}\n\n${JSON.stringify(data, null, 2)}`;
+            } catch (err) {
+                console.error('Erro:', err);
+                result.textContent = 'Erro: ' + err.message + '\n\nVeja o console para mais detalhes';
+            }
+        });
+    </script>
+</body>
+</html>

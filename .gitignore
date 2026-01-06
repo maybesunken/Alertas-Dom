@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/vendor/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Build outputs
+build/
+dist/
+frontend/build/
+backend/server
+*.exe
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Deployment
+.vercel/
+.railway/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+cookiejar.txt

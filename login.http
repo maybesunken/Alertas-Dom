@@ -1,0 +1,16 @@
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "login": "pedro.sansone@dompagamentos.com",
+    "pass": "pedro.sansone@dompagamentos.com"
+}
+
+### Tentativa 2: Usando email e password (Caso a doc esteja diferente)
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+    "email": "pedro.sansone@dompagamentos.com",
+    "password": "pedro.sansone@dompagamentos.com"
+}

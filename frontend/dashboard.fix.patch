@@ -1,0 +1,58 @@
+diff --git a/src/components/Dashboard.tsx b/src/components/Dashboard.tsx
+index 1234567..abcdef0 100644
+--- a/src/components/Dashboard.tsx
++++ b/src/components/Dashboard.tsx
+@@ -1,10 +1,17 @@
+-import React from 'react';
+-import { AlertCard } from './AlertCard';   // ❌ tipo
++import React from 'react';
++import AlertCard from './AlertCard';      // ✅ componente
++
++type Alert = {
++  id: number;
++  title: string;
++  severity: 'low' | 'high';
++};
++type Data = { alerts: Alert[] };
+ 
+ interface Props {
+-  data: any;
++  data: Data;
+ }
+ 
+ export default function Dashboard({ data }: Props) {
+-  const alert = data.alerts[index];        // ❌ index inexistente
++  if (!data?.alerts) return null;
+ 
+   return (
+     <div className="flex items-start">
+-      {data.alerts.map((alert) => (         // ❌ faltou index
++      {data.alerts.map((alert, index) => (
+         <AlertCard
+           key={alert.id}
+           alert={alert}
+-          className={alert.severity}        // ❌ undefined
++          className={alert.severity ?? 'low'}
+         />
+       ))}
+     </div>
+
+
+ESLint + autofix permanente
+Cole no .eslintrc.json:
+
+
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/strict-boolean-expressions": ["error", {
+      "allowNullableObject": true,
+      "allowNullableString": true
+    }]
+  }
+}
